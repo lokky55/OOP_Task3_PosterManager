@@ -1,6 +1,7 @@
 package ru.netology.domain;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.manager.PosterManager;
 
@@ -14,10 +15,14 @@ public class PosterManagerTest {
     private Film fifth = new Film(5, "The Invisible Man", "thriller", 2020);
     private Film sixth = new Film(6, "Gladiator", "adventures", 2000);
 
-    @Test
-    public void shouldAddFilm() {
+    @BeforeEach
+    public void setUp() {
         manager.addFilm(first);
         manager.addFilm(second);
+
+    }
+    @Test
+    public void shouldAddFilm() {
         manager.addFilm(third);
         Film[] actual = manager.findAll();
         Film[] expected = {first, second, third};
@@ -26,8 +31,6 @@ public class PosterManagerTest {
 
     @Test
     public void shouldFindLastFilm() {
-        manager.addFilm(first);
-        manager.addFilm(second);
         manager.addFilm(third);
         manager.addFilm(fourth);
         manager.addFilm(fifth);
@@ -63,8 +66,6 @@ public class PosterManagerTest {
 
     @Test
     public void shouldRemoveFilm() {
-        manager.addFilm(first);
-        manager.addFilm(second);
         Film[] actual = manager.removeById(1);
         Film[] expected ={second};
         Assertions.assertArrayEquals(expected, actual);
@@ -72,8 +73,6 @@ public class PosterManagerTest {
 
     @Test
     public void shouldRemoveAll() {
-        manager.addFilm(first);
-        manager.addFilm(second);
         Film[] actual = manager.removeAll();
         Film[] expected = {};
         Assertions.assertArrayEquals(expected, actual);
